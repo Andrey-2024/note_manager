@@ -1,0 +1,9 @@
+#@title Grade 1. Этап 1: Задание 2
+
+# Переменные из предыдущего задания
+created_date = "10-11-2024"
+issue_date = "10-12-2024"
+
+# Вывод даты без года напрямую
+print(created_date[:5])
+print(issue_date[:5])
