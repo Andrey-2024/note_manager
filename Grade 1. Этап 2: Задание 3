@@ -1,0 +1,33 @@
+from datetime import datetime
+
+#@title Главная функция программы
+def main():
+    """Простая программа для проверки дедлайна."""
+    #@title Вывод текущей даты
+    print("Текущая дата:", datetime.now().strftime("%d-%m-%Y"))
+
+    while True:
+        try:
+            #@title Ввод даты дедлайна
+            issue_date_str = input("Введите дату дедлайна (дд-мм-гггг): ")
+            issue_date = datetime.strptime(issue_date_str, "%d-%m-%Y")
+            break
+        except ValueError:
+            #@title Обработка неверного формата даты
+            print("Ошибка: Неверный формат. Введите дату в формате день-месяц-год, например: 10-12-2024.")
+
+    #@title Расчет разницы в днях
+    current_date = datetime.now()
+    days_difference = (issue_date - current_date).days
+
+    #@title Вывод результата
+    if days_difference < 0:
+        print(f"Внимание! Дедлайн истёк {-days_difference} дней назад.")
+    elif days_difference == 0:
+        print("Дедлайн сегодня!")
+    else:
+        print(f"До дедлайна осталось {days_difference} дней.")
+
+    #@title Точка входа
+if __name__ == "__main__":
+    main()
