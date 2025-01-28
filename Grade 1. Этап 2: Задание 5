@@ -1,0 +1,55 @@
+#@title Упрощённая программа для удаления заметок
+
+#@title Функция отображения заметок
+def display_notes(notes):
+    """Отображение текущих заметок."""
+    if notes:
+        print("\nТекущие заметки:")
+        for idx, note in enumerate(notes, 1):
+            print(f"{idx}. Имя: {note['name']}, Заголовок: {note['title']}, Описание: {note['description']}")
+    else:
+        print("\nСписок заметок пуст.")
+
+#@title Функция удаления заметок
+def delete_note_by_criteria(notes, criteria):
+    """Удаление заметок по имени или заголовку."""
+    updated_notes = [note for note in notes if note['name'] != criteria and note['title'] != criteria]
+    if len(updated_notes) < len(notes):
+        print("\nЗаметки успешно удалены.")
+    else:
+        print("\nЗаметки с таким критерием не найдены.")
+    return updated_notes
+
+#@title Главная функция программы
+def main():
+    """Главная функция программы."""
+    notes = [
+        {"name": "Алексей", "title": "Список покупок", "description": "Купить продукты на неделю"},
+        {"name": "Мария", "title": "Учеба", "description": "Подготовиться к экзамену"}
+    ]
+
+    while True:
+        print("\nМеню:")
+        print("1. Показать заметки")
+        print("2. Удалить заметку")
+        print("3. Выход")
+
+        choice = input("Выберите действие (1-3): ").strip()
+
+        if choice == "1":
+            display_notes(notes)
+        elif choice == "2":
+            if notes:
+                criteria = input("Введите имя пользователя или заголовок: ").strip()
+                notes = delete_note_by_criteria(notes, criteria)
+            else:
+                print("\nСписок заметок пуст. Удалять нечего.")
+        elif choice == "3":
+            print("\nВыход из программы.")
+            break
+        else:
+            print("\nНекорректный ввод. Попробуйте снова.")
+
+#@title Точка входа в программу
+if __name__ == "__main__":
+    main()
