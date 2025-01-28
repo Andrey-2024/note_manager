@@ -1,0 +1,38 @@
+import datetime
+
+#@title Функция создания заметки
+def create_note():
+    """
+    Функция для создания заметки. Запрашивает у пользователя информацию,
+    формирует словарь с данными заметки и возвращает его.
+    """
+    username = input("Введите имя пользователя: ").strip()
+    title = input("Введите заголовок заметки: ").strip()
+    content = input("Введите описание заметки: ").strip()
+    status = input("Введите статус заметки (новая, в процессе, выполнено): ").strip().lower()
+    issue_date = input("Введите дату дедлайна (день-месяц-год): ").strip()
+
+    try:
+        datetime.datetime.strptime(issue_date, "%d-%m-%Y")
+    except ValueError:
+        print("Дата дедлайна должна быть в формате 'день-месяц-год'.")
+        return None
+
+    created_date = datetime.datetime.now().strftime("%d-%m-%Y")
+
+    note = {
+        "username": username,
+        "title": title,
+        "content": content,
+        "status": status,
+        "created_date": created_date,
+        "issue_date": issue_date
+    }
+
+    return note
+
+# Вызов функции для демонстрации её работы
+if __name__ == "__main__":
+    note = create_note()
+    if note:
+        print("\nЗаметка создана:", note)
